@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { TailwindProvider } from 'tailwind-rn';
+import utilities from './tailwind.json';
 import { AuthContext } from './src/context';
 import LoadingScreen from './src/screens/LoadingScreen';
 import MainNavigation from './src/components/Navigation/MainNavigation';
@@ -34,14 +36,20 @@ export default function App() {
   }, [])
 
   if (isLoading) {
-    return <LoadingScreen />
+    return (
+      <TailwindProvider utilities={utilities}>
+        <LoadingScreen />
+      </TailwindProvider>
+    )
   }
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        {userToken ? <MainNavigation /> : <AuthNavigation />}
-      </NavigationContainer>
+      <TailwindProvider utilities={utilities}>
+        <NavigationContainer>
+          {userToken ? <MainNavigation /> : <AuthNavigation />}
+        </NavigationContainer>
+      </TailwindProvider>
     </AuthContext.Provider>
   );
 }

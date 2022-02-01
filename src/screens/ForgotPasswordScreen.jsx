@@ -1,9 +1,11 @@
 import { Button, SafeAreaView, Text } from 'react-native';
-import tw from 'tailwind-react-native-classnames';
+import {useTailwind} from 'tailwind-rn';
 
 export default function ForgotPasswordScreen({navigation}) {
+    const tailwind = useTailwind();
+
     return (
-        <SafeAreaView style={tw`flex items-center justify-center h-full`}>
+        <SafeAreaView style={tailwind('flex items-center justify-center h-full')}>
             <Text>Forgot password screen</Text>
             <Button title='Log In' onPress={() => navigation.navigate("LogIn")} />
             <Button title='Create Account' onPress={() => navigation.navigate("CreateAccount")} />
